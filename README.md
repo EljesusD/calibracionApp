@@ -205,17 +205,6 @@ PUT /api/orden/{id}/eliminar
 
 ---
 
-# Funcionalidades Académicas Cubiertas
-
---> Mínimo 5 pantallas  
---> Navegación funcional con SideMenu  
---> Formularios  
---> Consumo de API REST  
---> Persistencia en Base de Datos  
---> Aplicación híbrida móvil  
-
----
-
 # Autor
 
 Jesus Delgado
@@ -229,8 +218,6 @@ Maestría en Sistemas Computacionales
 La aplicación fue probada en:
 
 - Navegador Web
-- Emulador Android
-- Dispositivo físico Android
 
 ---
 
