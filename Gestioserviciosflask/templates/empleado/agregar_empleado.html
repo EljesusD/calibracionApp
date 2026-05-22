@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Agregar Empleado{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Agregar Nuevo Empleado</h1>
+<form method="POST" action="{{ url_for('nuevo_empleado') }}">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" name="correo">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" name="telefono">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control" name="direccion">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Escolaridad</label>
+        <input type="text" class="form-control" name="escolaridad">
+    </div>
+    <div class="mb-3">
+        <label class ="form-label">ID Rol</label>
+        <select class="form-control" name="id_rol" required>
+            <option value="">Seleccione un rol</option>
+            {% for rol in roles %}
+            <option value="{{ rol.id_rol }}">{{ rol.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('listar_empleados') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Usuarios Registrados</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Activo</th>
+            <th>ID Empleado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.id_usuario }}</td>
+            <td>{{ usuario.username }}</td>
+            <td>{{ 'Sí' if usuario.activo else 'No' }}</td>
+            <td>{{ usuario.id_empleado }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" class="text-center text-muted">No hay usuarios registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('crear_usuario') }}" class="btn btn-primary">Nuevo Usuario</a>
+{% endblock %}

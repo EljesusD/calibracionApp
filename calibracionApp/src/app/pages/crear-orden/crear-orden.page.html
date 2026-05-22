@@ -1,0 +1,200 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Nueva Orden</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form (ngSubmit)="guardarOrden()">
+
+    <!-- FECHA SOLICITUD -->
+    <ion-item>
+      <ion-label position="stacked">
+        Fecha Solicitud
+      </ion-label>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="orden.fecha_solicitud"
+        name="fecha_solicitud">
+      </ion-input>
+    </ion-item>
+
+    <!-- ESTADO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Estado
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="orden.estado"
+        name="estado">
+
+        <ion-select-option value="Pendiente">
+          Pendiente
+        </ion-select-option>
+
+        <ion-select-option value="En Proceso">
+          En Proceso
+        </ion-select-option>
+
+        <ion-select-option value="Finalizado">
+          Finalizado
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <!-- CLIENTE -->
+    <ion-item>
+      <ion-label position="stacked">
+        Cliente
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="orden.id_cliente"
+        name="id_cliente">
+
+        <ion-select-option
+          *ngFor="let cliente of clientes"
+          [value]="cliente.id_cliente">
+
+          {{ cliente.nombre_empresa }}
+
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <!-- EMPLEADO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Empleado
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="orden.id_empleado"
+        name="id_empleado">
+
+        <ion-select-option
+          *ngFor="let empleado of empleados"
+          [value]="empleado.id_empleado">
+
+          {{ empleado.nombre }}
+
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>
+        <h2>Detalle de la Orden</h2>
+      </ion-label>
+    </ion-item>
+
+    <!-- EQUIPO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Equipo
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="orden.id_equipo"
+        name="id_equipo">
+
+        <ion-select-option
+          *ngFor="let equipo of equipos"
+          [value]="equipo.id_equipo">
+
+          {{ equipo.nombre }}
+          -
+          {{ equipo.marca }}
+          -
+          {{ equipo.modelo }}
+
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <!-- SERVICIO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Servicio
+      </ion-label>
+
+      <ion-select
+        [(ngModel)]="orden.id_servicio"
+        name="id_servicio">
+
+        <ion-select-option
+          *ngFor="let servicio of servicios"
+          [value]="servicio.id_servicio">
+
+          {{ servicio.nombre_servicio }}
+
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <!-- FECHA INICIO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Fecha Inicio
+      </ion-label>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="orden.fecha_inicio"
+        name="fecha_inicio">
+      </ion-input>
+    </ion-item>
+
+    <!-- FECHA FIN -->
+    <ion-item>
+      <ion-label position="stacked">
+        Fecha Fin
+      </ion-label>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="orden.fecha_fin"
+        name="fecha_fin">
+      </ion-input>
+    </ion-item>
+
+    <!-- RESULTADO -->
+    <ion-item>
+      <ion-label position="stacked">
+        Resultado
+      </ion-label>
+
+      <ion-input
+        type="text"
+        [(ngModel)]="orden.resultado"
+        name="resultado">
+      </ion-input>
+    </ion-item>
+
+    <!-- BOTONES -->
+    <div style="margin-top: 25px;">
+
+      <ion-button
+        expand="block"
+        type="submit"
+        color="primary">
+
+        Guardar Orden
+
+
+      </ion-button>
+
+
+    </div>
+
+  </form>
+
+</ion-content>

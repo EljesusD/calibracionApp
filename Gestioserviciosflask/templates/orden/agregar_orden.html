@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Nueva Orden{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Registrar Nueva Orden de Servicio</h1>
+<form method="POST" action="{{ url_for('nueva_orden') }}">
+    <!-- Fecha solicitud -->
+    <div class="mb-3">
+        <label class="form-label">Fecha Solicitud</label>
+        <input type="date" class="form-control" name="fecha_solicitud" required>
+    </div>
+
+    <!-- Estado -->
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select class="form-select" name="estado">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En Proceso">En Proceso</option>
+            <option value="Finalizado">Finalizado</option>
+        </select>
+    </div>
+
+    <!-- Cliente -->
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <select class="form-select" name="id_cliente" required>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id_cliente }}">{{ cliente.nombre_empresa }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Empleado -->
+    <div class="mb-3">
+        <label class="form-label">Empleado</label>
+        <select class="form-select" name="id_empleado" required>
+            {% for empleado in empleados %}
+                <option value="{{ empleado.id_empleado }}">{{ empleado.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <hr>
+    <h4>Detalle de la Orden</h4>
+
+    <!-- Equipo -->
+    <div class="mb-3">
+        <label class="form-label">Equipo</label>
+        <select class="form-select" name="id_equipo" required>
+            {% for equipo in equipos %}
+                <option value="{{ equipo.id_equipo }}">{{ equipo.nombre }} ({{ equipo.marca }} - {{ equipo.modelo }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Servicio -->
+    <div class="mb-3">
+        <label class="form-label">Servicio</label>
+        <select class="form-select" name="id_servicio" required>
+            {% for servicio in servicios %}
+                <option value="{{ servicio.id_servicio }}">{{ servicio.nombre_servicio }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Fechas -->
+    <div class="mb-3">
+        <label class="form-label">Fecha Inicio</label>
+        <input type="date" class="form-control" name="fecha_inicio">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha Fin</label>
+        <input type="date" class="form-control" name="fecha_fin">
+    </div>
+
+    <!-- Resultado -->
+    <div class="mb-3">
+        <label class="form-label">Resultado</label>
+        <input type="text" class="form-control" name="resultado">
+    </div>
+
+    <!-- Botones -->
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('listar_ordenes') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

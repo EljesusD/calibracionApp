@@ -1,0 +1,19 @@
+ion-card {
+  margin-bottom: 16px;
+  border-radius: 14px;
+}
+
+ion-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ion-card-content p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+ion-toolbar {
+  --background: #1e3a8a;
+  --color: white;
+}

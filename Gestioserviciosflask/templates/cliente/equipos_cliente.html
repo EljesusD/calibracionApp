@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Detalle del Cliente{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Equipos Registrados</h2>
+
+{% if cliente.equipos %}
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in cliente.equipos %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.marca }}</td>
+                <td>{{ equipo.modelo }}</td>
+                <td>{{ equipo.numero_serie }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+    <p>No hay equipos registrados para este cliente.</p>
+{% endif %}
+<a href="{{ url_for('listar_clientes') }}" class="btn btn-secondary mt-3">Volver a la Lista de Clientes</a>
+{% endblock %}

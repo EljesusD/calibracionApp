@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Órdenes de Servicio{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Listado de Órdenes de Servicio</h1>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID Orden</th>
+            <th>Fecha Solicitud</th>
+            <th>Estado</th>
+            <th>Cliente</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for orden in ordenes %}
+        <tr>
+            <td>{{ orden.id_orden }}</td>
+            <td>{{ orden.fecha_solicitud }}</td>
+            <td>{{ orden.estado }}</td>
+            <td>{{ orden.cliente.nombre_empresa }}</td>
+            <td>
+                <a href="{{ url_for('listar_detalles', id_orden=orden.id_orden) }}" class="btn btn-info btn-sm">
+                    Ver Detalles
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">No hay órdenes registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('listar_ordenes') }}" class="btn btn-secondary">Volver a Órdenes</a>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Monitor IoT de Temperatura{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">🌡️ Monitor de Temperatura</h1>
+
+    <div class="row">
+        <!-- Gráfico -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Gráfico de Temperatura
+                </div>
+                <div class="card-body">
+                    <canvas id="tempChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Últimas Lecturas
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Hora</th>
+                                <th>Valor (°C)</th>
+                                <th>Dispositivo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaLecturas">
+                            {% for registro in datos %}
+                            <tr>
+                                <td>{{ registro.id }}</td>
+                                <td>{{ registro.timestamp }}</td>
+                                <td>{{ registro.valor }}</td>
+                                <td>{{ registro.dispositivo }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Librería Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const datos = {{ datos|tojson }};
+    const ctx = document.getElementById('tempChart').getContext('2d');
+
+    const tempChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: datos.map(d => d.timestamp), // ahora son strings legibles
+            datasets: [{
+                label: 'Temperatura (°C)',
+                data: datos.map(d => d.valor),
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    suggestedMin: 20,
+                    suggestedMax: 40
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

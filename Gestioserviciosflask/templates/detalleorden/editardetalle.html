@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Editar Detalle{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Editar Detalle #{{ detalle.id_detalle }}</h1>
+
+<form method="POST">
+    <!-- Selección de Equipo -->
+    <div class="mb-3">
+        <label for="id_equipo" class="form-label">Equipo</label>
+        <select name="id_equipo" class="form-select" required>
+            {% for equipo in equipos %}
+                <option value="{{ equipo.id_equipo }}" 
+                    {% if detalle.id_equipo == equipo.id_equipo %}selected{% endif %}>
+                    {{ equipo.nombre }} ({{ equipo.marca }} - {{ equipo.modelo }})
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Selección de Servicio -->
+    <div class="mb-3">
+        <label for="id_servicio" class="form-label">Servicio</label>
+        <select name="id_servicio" class="form-select" required>
+            {% for servicio in servicios %}
+                <option value="{{ servicio.id_servicio }}" 
+                    {% if detalle.id_servicio == servicio.id_servicio %}selected{% endif %}>
+                    {{ servicio.nombre_servicio }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Fechas -->
+    <div class="mb-3">
+        <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+        <input type="date" name="fecha_inicio" class="form-control" value="{{ detalle.fecha_inicio }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha_fin" class="form-label">Fecha Fin</label>
+        <input type="date" name="fecha_fin" class="form-control" value="{{ detalle.fecha_fin }}">
+    </div>
+
+    <!-- Resultado -->
+    <div class="mb-3">
+        <label for="resultado" class="form-label">Resultado</label>
+        <input type="text" name="resultado" class="form-control" value="{{ detalle.resultado }}">
+    </div>
+
+    <!-- Botones -->
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a href="{{ url_for('listar_detalles', id_orden=detalle.id_orden) }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

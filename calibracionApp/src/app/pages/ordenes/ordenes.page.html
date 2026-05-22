@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title> Órdenes de Servicio </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <p>Total órdenes: {{ ordenes.length }}</p>
+   <ion-button color="success" routerLink="/home">
+    Inicio
+  </ion-button>
+  <ion-button color="success" routerLink="/crear-orden">
+    Nueva Orden
+  </ion-button>
+
+  <ion-card *ngFor="let orden of ordenes">
+
+  <ion-card-header>
+    
+    <ion-card-title>
+      Orden #{{ orden.id }}
+    </ion-card-title>
+
+    <ion-card-subtitle>
+      {{ orden.fecha }}
+    </ion-card-subtitle>
+
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <p>
+      <strong>Cliente:</strong>
+      {{ orden.cliente }}
+    </p>
+
+    <p>
+      <strong>Estado:</strong>
+      {{ orden.estado }}
+    </p>
+
+    <ion-button color="primary"
+     (click)="verDetalle(orden.id)">
+     Detalles
+    </ion-button>
+
+   <ion-button
+  color="warning"
+  (click)="editar(orden.id); $event.stopPropagation()">
+
+  Editar
+  </ion-button>
+
+    <ion-button
+      color="danger"
+      (click)="eliminar(orden.id)">
+      Eliminar
+    </ion-button>
+
+  </ion-card-content>
+
+</ion-card>

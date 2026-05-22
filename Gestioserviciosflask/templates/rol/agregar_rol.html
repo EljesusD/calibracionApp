@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Agregar Rol{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Agregar Nuevo Rol</h1>
+<form method="POST" action="{{ url_for('nuevo_rol') }}">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-control" name="descripcion"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('listar_roles') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

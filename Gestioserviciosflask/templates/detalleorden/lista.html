@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Órdenes de Servicio{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Detalle de la Orden #{{ orden.id_orden }}</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID Detalle</th>
+            <th>ID Orden</th>
+            <th>ID Equipo</th>
+            <th>Equipo</th>
+            <th>ID Servicio</th>
+            <th>Servicio</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Resultado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detalle in detalles %}
+        <tr>
+            <td>{{ detalle.id_detalle }}</td>
+            <td>{{ detalle.id_orden }}</td>
+            <td>{{ detalle.id_equipo }}</td>
+            <td>{{ detalle.equipo.nombre }} ({{ detalle.equipo.marca }} - {{ detalle.equipo.modelo }})</td>
+            <td>{{ detalle.id_servicio }}</td>
+            <td>{{ detalle.servicio.nombre_servicio }}</td>
+            <td>{{ detalle.fecha_inicio }}</td>
+            <td>{{ detalle.fecha_fin }}</td>
+            <td>{{ detalle.resultado }}</td>
+            <td>
+                <a href="{{ url_for('editar_detalle', id_detalle=detalle.id_detalle) }}" 
+                   class="btn btn-sm btn-warning">Editar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="10" class="text-center text-muted">No hay detalles registrados para esta orden.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('listar_ordenes_detalle') }}" class="btn btn-secondary">Volver a Órdenes</a>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Agregar Servicio de Calibración{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Agregar Nuevo Servicio de Calibración</h1>
+
+<form method="POST" action="{{ url_for('agregar_servicio') }}">
+    <!-- Selección de cliente -->
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <select class="form-select" name="id_cliente" id="clienteSelect" required>
+            <option value="">Seleccione un cliente</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id_cliente }}">{{ cliente.nombre_empresa }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Datos del servicio -->
+    <div class="mb-3">
+        <label class="form-label">Nombre del Servicio</label>
+        <input type="text" class="form-control" name="nombre_servicio" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-control" name="descripcion" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Costo (MXN)</label>
+        <input type="number" step="0.01" class="form-control" name="costo" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tiempo Estimado (días)</label>
+        <input type="number" class="form-control" name="tiempo_estimado" required>
+    </div>
+
+    <!-- Equipos asociados -->
+    <div class="mb-3">
+        <label class="form-label">Equipos Asociados</label>
+        <div id="equiposContainer">
+            <p class="text-muted">Seleccione un cliente para ver sus equipos.</p>
+        </div>
+    </div>
+
+    <!-- Botones -->
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('listar_servicios') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<script>
+document.getElementById('clienteSelect').addEventListener('change', function() {
+    const clienteId = this.value;
+    const equiposContainer = document.getElementById('equiposContainer');
+    equiposContainer.innerHTML = '';
+
+    if (clienteId) {
+        fetch(`/equipos_por_cliente/${clienteId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    data.forEach(equipo => {
+                        const div = document.createElement('div');
+                        div.classList.add('form-check');
+                        div.innerHTML = `
+                            <input class="form-check-input" type="checkbox" name="equipos" value="${equipo.id_equipo}">
+                            <label class="form-check-label">${equipo.nombre} (${equipo.marca} - ${equipo.modelo})</label>
+                        `;
+                        equiposContainer.appendChild(div);
+                    });
+                } else {
+                    equiposContainer.innerHTML = '<p class="text-muted">Este cliente no tiene equipos registrados.</p>';
+                }
+            });
+    } else {
+        equiposContainer.innerHTML = '<p class="text-muted">Seleccione un cliente para ver sus equipos.</p>';
+    }
+});
+</script>
+{% endblock %}

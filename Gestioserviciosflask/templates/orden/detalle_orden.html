@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Detalle de Orden{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Detalle de Orden de Servicio</h1>
+
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        Orden #{{ orden.id_orden }}
+    </div>
+    <div class="card-body">
+        <p><strong>Fecha de Solicitud:</strong> {{ orden.fecha_solicitud }}</p>
+        <p><strong>Estado:</strong> {{ orden.estado }}</p>
+
+        <hr>
+        <h5>Cliente</h5>
+        <p><strong>ID Cliente:</strong> {{ orden.cliente.id_cliente }}</p>
+        <p><strong>Empresa:</strong> {{ orden.cliente.nombre_empresa }}</p>
+        <p><strong>Contacto:</strong> {{ orden.cliente.contacto }}</p>
+        <p><strong>Teléfono:</strong> {{ orden.cliente.telefono }}</p>
+        <p><strong>Correo:</strong> {{ orden.cliente.correo }}</p>
+        <p><strong>Dirección:</strong> {{ orden.cliente.direccion }}</p>
+
+        <hr>
+        <h5>Empleado Asignado</h5>
+        {% if orden.empleado %}
+            <p><strong>ID Empleado:</strong> {{ orden.empleado.id_empleado }}</p>
+            <p><strong>Nombre:</strong> {{ orden.empleado.nombre }} {{ orden.empleado.apellidos }}</p>
+            <p><strong>Correo:</strong> {{ orden.empleado.correo }}</p>
+            <p><strong>Teléfono:</strong> {{ orden.empleado.telefono }}</p>
+            <p><strong>Dirección:</strong> {{ orden.empleado.direccion }}</p>
+            <p><strong>Escolaridad:</strong> {{ orden.empleado.escolaridad }}</p>
+            <p><strong>Rol:</strong> {{ orden.empleado.rol.nombre }}</p>
+        {% else %}
+            <p>No hay empleado asignado.</p>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{{ url_for('listar_ordenes') }}" class="btn btn-secondary mt-3">Volver a Órdenes</a>
+{% endblock %}

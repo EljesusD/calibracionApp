@@ -1,0 +1,68 @@
+<ion-menu contentId="main-content">
+
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-list>
+
+      <ion-item routerLink="/home">
+        Inicio
+      </ion-item>
+
+      <ion-item routerLink="/ordenes">
+        Órdenes
+      </ion-item>
+
+
+
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+
+
+<div class="ion-page" id="main-content">
+
+  <ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-buttons slot="start">
+
+        <ion-menu-button></ion-menu-button>
+
+      </ion-buttons>
+
+      <ion-title>SIMAC</ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content>
+
+    <div class="contenedor">
+
+      <h1>Laboratorio de Calibración</h1>
+
+      <p>Bienvenido al sistema móvil</p>
+
+      <ion-button
+        expand="block"
+        routerLink="/ordenes">
+
+        Ver Órdenes
+
+      </ion-button>
+
+    </div>
+
+  </ion-content>
+
+</div>

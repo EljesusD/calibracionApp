@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Editar Empleado{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Editar Empleado</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{ empleado.nombre }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="apellidos" value="{{ empleado.apellidos }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" name="correo" value="{{ empleado.correo }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" class="form-control" name="telefono" value="{{ empleado.telefono }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control" name="direccion" value="{{ empleado.direccion }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Escolaridad</label>
+        <input type="text" class="form-control" name="escolaridad" value="{{ empleado.escolaridad }}">
+    </div>
+    <div class="mb-3">
+        <label class ="form-label">ID Rol</label>
+        <select class="form-control" name="id_rol" required>
+            <option value="">Seleccione un rol</option>
+            {% for rol in roles %}
+            <option value="{{ rol.id_rol }}" {% if empleado.id_rol == rol.id_rol %}selected{% endif %}>{{ rol.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{{ url_for('listar_empleados') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
+``

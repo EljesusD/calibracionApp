@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Empleados Registrados</h1>
+<a href="{{ url_for('agregar_empleado') }}" class="btn btn-success mb-3">Agregar Nuevo Empleado</a>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Escolaridad</th>
+            <th>ID Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado.id_empleado }}</td>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.apellidos }}</td>
+            <td>{{ empleado.correo }}</td>
+            <td>{{ empleado.telefono }}</td>
+            <td>{{ empleado.direccion }}</td>
+            <td>{{ empleado.escolaridad }}</td>
+            <td>{{ empleado.rol.nombre }}</td>
+            <td>
+                <a href="{{ url_for('editar_empleado', id_empleado=empleado.id_empleado) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('eliminar_empleado', id_empleado=empleado.id_empleado) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este empleado?');">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

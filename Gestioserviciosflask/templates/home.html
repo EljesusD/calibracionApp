@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Panel Principal{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Panel Principal</h1>
+<p class="lead">Bienvenido al sistema de gestión del laboratorio. Selecciona un módulo:</p>
+
+<!-- Imagen  
+<div class="text-center mb-4">
+    <img src="{{ url_for('static', filename='img/laboratorio.jpg') }}" 
+         class="img-fluid rounded shadow" 
+         alt="Laboratorio de calibración">
+         -->
+
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <!-- Gestión de Equipos -->
+  <div class="col">
+    <div class="card card-module h-100 border-primary">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-tools me-2 text-primary"></i>Gestión de Equipos</h5>
+        <p class="card-text">Registrar, editar y consultar equipos.</p>
+        <a href="{{ url_for('listar_equipos') }}" class="btn btn-outline-primary">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gestión de Clientes -->
+  <div class="col">
+    <div class="card card-module h-100 border-success">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-user-friends me-2 text-success"></i>Gestión de Clientes</h5>
+        <p class="card-text">Administrar información de clientes.</p>
+        <a href="{{ url_for('listar_clientes') }}" class="btn btn-outline-success">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Órdenes de Servicio -->
+  <div class="col">
+    <div class="card card-module h-100 border-warning">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-file-alt me-2 text-warning"></i>Órdenes de Servicio</h5>
+        <p class="card-text">Generar órdenes de servicio.</p>
+          <p class="card-text text-danger fw-bold" >⚠ En desarrollo de mejoras.</p>   
+        <a href="{{ url_for('listar_ordenes') }}" class="btn btn-outline-warning">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empleados -->
+  <div class="col">
+    <div class="card card-module h-100 border-info">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-user-tie me-2 text-info"></i>Empleados</h5>
+        <p class="card-text">Administrar empleados.</p>
+        <a href="{{ url_for('listar_empleados') }}" class="btn btn-outline-info">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roles -->
+  <div class="col">
+    <div class="card card-module h-100 border-secondary">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-user-shield me-2 text-secondary"></i>Roles</h5>
+        <p class="card-text">Administrar roles de empleados.</p>
+        <a href="{{ url_for('listar_roles') }}" class="btn btn-outline-secondary">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Servicios -->
+  <div class="col">
+    <div class="card card-module h-100 border-dark">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-cogs me-2 text-dark"></i>Servicios</h5>
+        <p class="card-text">Administrar servicios de calibración.</p>
+        <p class="card-text text-danger fw-bold" > ⚠ En desarrollo de mejoras.</p> 
+        <a href="{{ url_for('listar_servicios') }}" class="btn btn-outline-dark">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Órdenes -->
+  <div class="col">
+    <div class="card card-module h-100 border-danger">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-list-alt me-2 text-danger"></i>Detalles de Órdenes</h5>
+        <p class="card-text">Consultar órdenes y sus detalles asociados.</p>
+        <p class="card-text text-danger fw-bold" > ⚠ En desarrollo de mejoras.</p> 
+        <a href="{{ url_for('listar_ordenes_detalle') }}" class="btn btn-outline-danger">Entrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- IoT de temperatura -->
+  
+  <div class="col">
+    <div class="card card-module h-100 border-dark">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-thermometer-half me-2 text-dark"></i>Monitoreo de Temperatura</h5>
+        <p class="card-text">Visualizar datos de temperatura en tiempo real.</p>
+        <p class="card-text text-danger fw-bold" > ⚠ En desarrollo de mejoras.</p> 
+        <a href="{{ url_for('iot_temperatura') }}" class="btn btn-outline-dark">Entrar</a>
+      </div>
+    </div>
+</div> 
+{% endblock %}

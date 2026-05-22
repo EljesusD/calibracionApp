@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Detalle del Servicio de Calibración{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Detalle del Servicio de Calibración</h1>
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        Servicio #{{ servicio.id_servicio }} - {{ servicio.nombre_servicio }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Cliente</h5>
+        <p class="card-text">
+            <strong>Empresa:</strong> {{ servicio.cliente.nombre_empresa }} <br>
+            <strong>Contacto:</strong> {{ servicio.cliente.contacto }} <br>
+            <strong>Teléfono:</strong> {{ servicio.cliente.telefono }} <br>
+            <strong>Correo:</strong> {{ servicio.cliente.correo }}
+        </p>
+
+        <h5 class="card-title mt-4">Información del Servicio</h5>
+        <p class="card-text">
+            <strong>Descripción:</strong> {{ servicio.descripcion }} <br>
+            <strong>Costo:</strong> ${{ servicio.costo }} <br>
+            <strong>Tiempo Estimado:</strong> {{ servicio.tiempo_estimado }} días
+        </p>
+
+        <h5 class="card-title mt-4">Equipos Asociados</h5>
+        {% if servicio.equipos %}
+            <ul>
+                {% for equipo in servicio.equipos %}
+                    <li>
+                        <strong>{{ equipo.nombre }}</strong> 
+                        ({{ equipo.marca }} - {{ equipo.modelo }}) <br>
+                        Serie: {{ equipo.numero_serie }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No hay equipos asociados a este servicio.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="{{ url_for('editar_servicio', id_servicio=servicio.id_servicio) }}" class="btn btn-warning">Editar</a>
+    <form action="{{ url_for('eliminar_servicio', id_servicio=servicio.id_servicio) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este servicio?');">Eliminar</button>
+    </form>
+    <a href="{{ url_for('listar_servicios') }}" class="btn btn-secondary">Volver a la lista</a>
+</div>
+{% endblock %}

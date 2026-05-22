@@ -1,0 +1,7 @@
+{
+  "name": "calibracionApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

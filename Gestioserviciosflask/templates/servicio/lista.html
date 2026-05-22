@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Lista de Servicios de Calibración{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Servicios de Calibración Registrados</h1>
+
+<!-- Botón para agregar nuevo servicio -->
+<a href="{{ url_for('agregar_servicio') }}" class="btn btn-success mb-3">Agregar Nuevo Servicio</a>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Servicio</th>
+            <th>Cliente</th>
+            <th>Descripción</th>
+            <th>Costo</th>
+            <th>Tiempo Estimado (días)</th>
+            <th>Equipos Asociados</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servicio in servicios %}
+        <tr>
+            <td>{{ servicio.id_servicio }}</td>
+            <td>{{ servicio.nombre_servicio }}</td>
+            <td>{{ servicio.cliente.nombre_empresa }}</td>
+            <td>{{ servicio.descripcion }}</td>
+            <td>${{ servicio.costo }}</td>
+            <td>{{ servicio.tiempo_estimado }}</td>
+            <td>
+                {% if servicio.equipos %}
+                    <ul>
+                        {% for equipo in servicio.equipos %}
+                            <li>{{ equipo.nombre }} ({{ equipo.marca }} - {{ equipo.modelo }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <span class="text-muted">Sin equipos asociados</span>
+                {% endif %}
+            </td>
+            <td>
+                <!-- Botón Editar -->
+                <a href="{{ url_for('editar_servicio', id_servicio=servicio.id_servicio) }}" 
+                   class="btn btn-warning btn-sm">Editar</a>
+                
+                <!-- Botón Eliminar -->
+                <form action="{{ url_for('eliminar_servicio', id_servicio=servicio.id_servicio) }}" 
+                      method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" 
+                            onclick="return confirm('¿Seguro que deseas eliminar este servicio?');">
+                        Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-title>
+      Detalle de Orden
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-button color="success" routerLink="/home">
+    Inicio
+  </ion-button>
+
+<ion-content class="ion-padding">
+
+  <ion-card *ngFor="let detalle of detalles">
+
+    <ion-card-header>
+
+      <ion-card-title>
+        Detalle #{{ detalle.id_detalle }}
+      </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        <strong>Equipo:</strong>
+        {{ detalle.id_equipo }}
+      </p>
+
+      <p>
+        <strong>Servicio:</strong>
+        {{ detalle.id_servicio }}
+      </p>
+
+      <p>
+        <strong>Fecha inicio:</strong>
+        {{ detalle.fecha_inicio }}
+      </p>
+
+      <p>
+        <strong>Fecha fin:</strong>
+        {{ detalle.fecha_fin }}
+      </p>
+
+      <p>
+        <strong>Resultado:</strong>
+        {{ detalle.resultado }}
+      </p>
+
+      
+
+      
+    </ion-card-content>
+    
+
+
+  </ion-card>
+
+
+</ion-content>

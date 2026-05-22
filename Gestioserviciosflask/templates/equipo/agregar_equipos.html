@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Agregar Equipo{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Agregar Nuevo Equipo</h1>
+<form method="POST" action="{{ url_for('nuevo_equipo') }}">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Marca</label>
+        <input type="text" class="form-control" name="marca">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Modelo</label>
+        <input type="text" class="form-control" name="modelo">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Número de Serie</label>
+        <input type="text" class="form-control" name="numero_serie">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rango de Medición</label>
+        <input type="text" class="form-control" name="rango_medicion">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Resolución</label>
+        <input type="text" class="form-control" name="resolucion">
+    </div>
+  <!-- se modifica para visualizar en el campo a que cliente pertenece el equipo en lugar del ID cliente --> 
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <select class="form-control" name="id_cliente" required>
+
+            <option value="">Seleccione un cliente</option>
+
+            {% for cliente in clientes %}
+             <option value="{{ cliente.id_cliente }}">
+                {{ cliente.nombre_empresa }}
+            </option>
+             {% endfor %}
+
+        </select>
+    </div>
+     
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('listar_equipos') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

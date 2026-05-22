@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Editar Orden</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label position="stacked">
+      Cliente
+    </ion-label>
+
+    <ion-input
+      [(ngModel)]="orden.cliente">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">
+      Estado
+    </ion-label>
+
+    <ion-input
+      [(ngModel)]="orden.estado">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">
+      Fecha
+    </ion-label>
+
+    <ion-input
+      [(ngModel)]="orden.fecha">
+    </ion-input>
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    color="warning"
+    (click)="editarOrden()">
+
+    Guardar Cambios
+
+  </ion-button>
+
+</ion-content>

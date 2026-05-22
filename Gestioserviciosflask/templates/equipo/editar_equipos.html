@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Editar Equipo{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Editar Equipo</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{ equipo.nombre }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Marca</label>
+        <input type="text" class="form-control" name="marca" value="{{ equipo.marca }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Modelo</label>
+        <input type="text" class="form-control" name="modelo" value="{{ equipo.modelo }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Número de Serie</label>
+        <input type="text" class="form-control" name="numero_serie" value="{{ equipo.numero_serie }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rango de Medición</label>
+        <input type="text" class="form-control" name="rango_medicion" value="{{ equipo.rango_medicion }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Resolución</label>
+        <input type="text" class="form-control" name="resolucion" value="{{ equipo.resolucion }}">
+    </div>
+    <!-- se modifica para visualizar en el campo a que cliente pertenece el equipo en lugar del ID cliente --> 
+    <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <select class="form-control" name="id_cliente" required>
+
+            <option value="">Seleccione un cliente</option>
+
+            {% for cliente in clientes %}
+             <option value="{{ cliente.id_cliente }}">
+                {{ cliente.nombre_empresa }}
+            </option>
+             {% endfor %}
+
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{{ url_for('listar_equipos') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

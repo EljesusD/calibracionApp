@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Editar Orden{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Editar Orden de Servicio</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Fecha Solicitud</label>
+        <input type="date" class="form-control" name="fecha_solicitud" value="{{ orden.fecha_solicitud }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Estado</label>
+        <select class="form-select" name="estado">
+            <option value="Pendiente" {% if orden.estado == "Pendiente" %}selected{% endif %}>Pendiente</option>
+            <option value="En Proceso" {% if orden.estado == "En Proceso" %}selected{% endif %}>En Proceso</option>
+            <option value="Finalizado" {% if orden.estado == "Finalizado" %}selected{% endif %}>Finalizado</option>
+        </select>
+    </div>
+    <!-- se modifica para seleccionar un cliente pero que en lugar de mostrar el ID, muestre el nombre de la empresa -->
+    <div class="mb-3">
+        <label class ="form-label">ID Cliente</label>
+        <select class="form-control" name="id_cliente" required>
+            <option value="">Seleccione un cliente</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id_cliente }}" {% if cliente.id_cliente == orden.id_cliente %}selected{% endif %}>{{ cliente.nombre_empresa }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <!-- se modifica para seleccionar un empleado pero que en lugar de mostrar el ID, muestre el nombre y apellidos -->
+    <div class="mb-3">
+        <label class="form-label">ID Empleado</label>
+        <select class="form-control" name="id_empleado" required>
+            <option value="">Seleccione un empleado</option>
+            {% for empleado in empleados %}
+            <option value="{{ empleado.id_empleado }}" {% if empleado.id_empleado == orden.id_empleado %}selected{% endif %}>{{ empleado.nombre }} {{ empleado.apellidos }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{{ url_for('listar_ordenes') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
